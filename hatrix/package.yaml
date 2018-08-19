@@ -1,0 +1,49 @@
+name:                hatrix
+version:             0.0.0.0
+github:              unclechu/hatrix
+license:             GPL-3
+author:              Viacheslav Lotsmanov
+maintainer:          lotsmanov89@gmail.com
+category:            GUI
+synopsis:            Matrix protocol GUI client written in Haskell.
+
+description:
+  Matrix protocol GUI client written in Haskell.
+
+dependencies:
+  - aeson
+  - aeson-pretty
+  - attoparsec
+  - base >= 4.11 && < 5
+  - base-unicode-symbols
+  - bytestring
+  - classy-prelude
+  - data-default
+  - directory
+  - either
+  - glib
+  - gtk3
+  - lifted-base
+  - monad-logger
+  - mtl
+  - qm-interpolated-string
+  - time
+  - unliftio
+  - unliftio-core
+  - unordered-containers
+
+ghc-options:
+  - -Wall
+  - -O2
+
+library:
+  source-dirs: src
+
+executables:
+  hatrix:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+      - -threaded
+    dependencies:
+      - hatrix
