@@ -24,4 +24,3 @@ writeLoggerBusEventsToMonadLogger = forever $ do
   case msgType of
        LogInfo  → logInfoN  msg
        LogError → logErrorN msg
-

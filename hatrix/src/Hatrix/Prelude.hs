@@ -11,6 +11,8 @@ module Hatrix.Prelude
      , module Data.Functor
      , (•)
      , (◇)
+     , (×)
+     , (□), (◲), (■)
      , type 𝔹
      ) where
 
@@ -35,3 +37,28 @@ infixl 9 •
 (◇) = (<>)
 {-# INLINE (◇) #-}
 infixr 6 ◇
+
+
+-- Better multiplication operator (better alternative to `(⋅)`)
+(×) ∷ Num α ⇒ α → α → α
+(×) = (*)
+{-# INLINE (×) #-}
+infixl 7 ×
+
+
+-- Unicode exponent operators
+
+(□) ∷ (Num α, Integral β) ⇒ α → β → α
+(□) = (^)
+{-# INLINE (□) #-}
+infixr 8 □
+
+(◲) ∷ (Fractional α, Integral β) ⇒ α → β → α
+(◲) = (^^)
+{-# INLINE (◲) #-}
+infixr 8 ◲
+
+(■) ∷ Floating α ⇒ α → α → α
+(■) = (**)
+{-# INLINE (■) #-}
+infixr 8 ■
