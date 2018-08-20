@@ -2,6 +2,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE MonoLocalBinds #-}
 {-# LANGUAGE UnicodeSyntax #-}
+{-# LANGUAGE DuplicateRecordFields #-}
 
 module Hatrix.GUI.Component
      ( Box (..)
@@ -9,9 +10,12 @@ module Hatrix.GUI.Component
      , EventSubscription (..)
      , Event (..)
      , Component (..)
+     , ComponentMeta (..)
      ) where
 
 import           Hatrix.Prelude
+
+import           Data.Default
 
 
 data Box id
@@ -41,4 +45,24 @@ data Event
      deriving (Show, Eq)
 
 
-data Monad m ⇒ Component id s m = Component s (s → Maybe id → Event → m s) (Box id)
+data ComponentMeta
+   = ComponentMeta
+   { label         ∷ Maybe Text
+   , borderWidth   ∷ Maybe ℤ
+   , isModal       ∷ 𝔹
+   , quitOnDestroy ∷ 𝔹
+   } deriving (Show, Eq)
+
+instance Default ComponentMeta where
+  def
+    = ComponentMeta
+    { label         = Nothing
+    , borderWidth   = Nothing
+    , isModal       = False
+    , quitOnDestroy = False
+    }
+
+
+data Monad m
+   ⇒ Component id s m
+   = Component ComponentMeta s (s → Maybe id → Event → m s) (Box id)

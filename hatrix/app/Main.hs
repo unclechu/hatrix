@@ -16,6 +16,7 @@ import           Hatrix.Logger
 import           Hatrix.Monad.MVar
 import           Hatrix.Monad.Thread
 import           Hatrix.Monad.LoggerBus
+import           Hatrix.GUI.Implementation.GTK
 
 import           Data.Default
 import           Text.InterpolatedString.QM
@@ -43,5 +44,4 @@ main = do
           logError [qms| Parsing config failed with message: {errMsg},
                          using default config… |]
 
-    logInfo [qm| Foo {config}… |]
-    logError [qm| Bar… |]
+    runGtkGUI

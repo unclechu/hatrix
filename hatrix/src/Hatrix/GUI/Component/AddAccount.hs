@@ -5,6 +5,7 @@
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE ConstraintKinds #-}
+{-# LANGUAGE DuplicateRecordFields #-}
 
 module Hatrix.GUI.Component.AddAccount
      ( addAccountComponent
@@ -44,7 +45,7 @@ type Constraint m = (Monad m, MonadReader AppContext m, MonadLoggerBus m)
 
 addAccountComponent ∷ (Constraint m) ⇒ Component Identifier State m
 addAccountComponent
-  = Component def eventHandler
+  = Component meta def eventHandler
   $ Vertical
   [ Label { label = "Please enter account data:" }
   , TextInput { identifier = Just AuthTokenId
@@ -55,6 +56,13 @@ addAccountComponent
               }
   ]
   where
+    meta
+      = def
+      { label         = Just "Add an account"
+      , borderWidth   = Just 10
+      , quitOnDestroy = True
+      }
+
     eventHandler ∷ (Constraint m) ⇒ State → Maybe Identifier → Event → m State
     eventHandler state id' event = do
       logInfo
